@@ -9,61 +9,28 @@ console.log(
  */
 
 var gcdOfStrings = function (str1, str2) {
-  let gcd = "";
-  let pattern = "";
-  let longer = str1.length > str2.length ? str1 : str2;
-  let shorter = str1.length < str2.length ? str1 : str2;
+  let gcd;
 
-  const longerL = longer.length;
-  const shorterL = shorter.length;
+  const str1Length = str1.length;
+  const str2Length = str2.length;
 
-  let patternL = 0;
+  if (str1 + str2 == str2 + str1) {
+    var getCommonDivisor = (reducer, divisor) => {
+      if (!divisor) {
+        return reducer;
+      } else {
+        return getCommonDivisor(divisor, reducer % divisor);
+      }
+    };
 
-  // PATTERN FINDER *****
-  for (let i = 0; i < longerL; i++) {
-    if (longer[i] === shorter[i]) pattern += shorter[i];
+    const commonDivisor = getCommonDivisor(str1Length, str2Length);
 
-    let patternBuild = "";
-    patternL = pattern.length;
-    const quotient = longerL / patternL;
-
-    let p = 0;
-    while (p < quotient) {
-      patternBuild += pattern;
-      p++;
-    }
-
-    if (patternBuild === longer) {
-      console.log(
-        "BREAK: Pattern build is equal to longer string. Pattern:::",
-        pattern
-      );
-      break;
-    } else if (patternL >= shorterL) {
-      pattern = "";
-      break;
-    }
-  }
-  //END PATTERN FINDER *****
-
-  if (pattern) {
-    gcd = pattern;
-    console.log(
-      shorterL % (gcd.length + patternL) != 0 &&
-        longerL % (gcd.length + patternL) != 0
-    );
-    while (
-      shorterL % (gcd.length + patternL) != 0 &&
-      longerL % (gcd.length + patternL) != 0
-    ) {
-      gcd += pattern;
-      console.log(gcd);
-
-      //   break;
-    }
+    gcd = str1.slice(0, commonDivisor);
+  } else {
+    gcd = "";
   }
 
   return gcd;
 };
 
-console.log("RETURN: ", gcdOfStrings("ABABABAB", "ABAB"));
+console.log("RETURN: ", gcdOfStrings("ABABAB", "ABABABABABAB"));
