@@ -6,8 +6,8 @@ var productExceptSelf = function (nums) {
   const leftArr = [];
   const rightArr = [];
 
-  for (let i = 1; i < length + 1; i++) {
-    leftArr[i] = nums[i] * arr[i - 1];
+  for (let i = 0; i < length; i++) {
+    leftArr[i] = nums[i] * arr[i];
   }
 
   for (let i = 0; i < length; i++) {
