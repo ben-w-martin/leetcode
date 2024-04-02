@@ -97,4 +97,114 @@ strings.unshift("x"); // adds item to beginning of an array. O(n)
 // shifts every item to a new index by iterating
 // Arrays may not be the best when you need to add items to the beginning
 
-strings.splice(2, 1, "g"); //
+strings.splice(2, 1, "alien"); // O(n)
+
+console.log(strings);
+
+// if you add to the beginning or the body, O(n)
+// if you push to the end, O(1)
+
+/* =========================================
+ *  How to build / How to use
+ *
+ * Arrays in JS are Objects with int based keys
+ */
+
+class myArray {
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+
+  get(index) {
+    return this.data[index];
+  }
+
+  push(item) {
+    this.data[this.length] = item;
+    this.length++;
+    return this.length;
+  }
+
+  pop() {
+    const lastItem = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return lastItem;
+  }
+
+  delete(index) {
+    const item = this.data[index];
+    this.shiftItems(index);
+  }
+
+  shiftItems(index) {
+    for (let i = index; i < this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+}
+
+const newArray = new myArray();
+newArray.push("hi");
+newArray.push("hello");
+newArray.push("you");
+newArray.push("are");
+newArray.push("nice");
+newArray.push("!");
+// newArray.pop();
+newArray.delete(2);
+console.log(newArray);
+
+// as soon as you start deleting/shifting, you have to
+// loop and therefor that method becomes O(n)
+
+// TREAT STRING QUESTIONS AS ARRAY QUESTIONS
+
+// Create a function that reverses a string:
+
+function reverse(s) {
+  if (!s || typeof s !== "string" || s.length < 2) return "try again";
+
+  const backwards = [];
+  const totalItems = s.length - 1;
+
+  for (let i = totalItems; i >= 0; i--) {
+    backwards.push(s[i]);
+  }
+
+  return backwards.join("");
+}
+
+console.log(reverse("hello"));
+
+function reverseBetter(s) {
+  if (!s || typeof s !== "string" || s.length < 2) return "try again";
+
+  //   return s.split("").reverse().join("");
+}
+
+console.log(reverseBetter("Mamamia"));
+
+const reverseGooder = (s) => [...s].reverse().join("");
+
+console.log(reverseGooder("this is a string"));
+
+// ARRAY INTERVIEW QUESTION
+
+// Merge two sorted arrays as a larger sorted array
+
+console.log("*******************************************");
+
+const mergeSortedArrays = (arr1, arr2) => {
+  if (arr1.length < 1 && arr2.length > 0) return arr2;
+  if (arr2.length < 1 && arr1.length > 0) return arr1;
+
+  arr1 = arr1.concat(arr2);
+
+  return arr1.sort((a, b) => a - b);
+};
+
+console.log(mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]));
