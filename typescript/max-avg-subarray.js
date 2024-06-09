@@ -4,21 +4,22 @@ function findMaxAverage(nums, k) {
     for (let i = 0; i < k; i++) {
         sum += nums[i];
     }
-    let avg = sum / k;
-    let max = avg;
-    console.log(`sum: ${sum}, avg: ${avg}, max: ${max}`);
+    let max = getMax(-Infinity, sum);
     if (k < nums.length) {
         for (let i = 1; i < nums.length; i++) {
             sum -= nums[i - 1];
             sum += nums[i + k - 1];
-            avg = sum / k;
-            max = max > avg ? max : avg;
-            console.log(`sum: ${sum}, avg: ${avg}, max: ${max}`);
+            max = getMax(max, sum);
             if (typeof nums[i + k] !== 'number')
                 break;
         }
     }
     return max;
+    function getMax(maximum, arraySum) {
+        let average = arraySum / k;
+        let newMax = maximum > average ? maximum : average;
+        return newMax;
+    }
 }
 const arr = [6, 8, 6, 8, 0, 4, 1, 2, 9, 9];
 console.log(findMaxAverage(arr, 2));

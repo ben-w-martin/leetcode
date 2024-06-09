@@ -5,22 +5,24 @@ function findMaxAverage(nums: number[], k: number): number {
         sum += nums[i]
     }
     
-    let avg: number = sum / k;
-    let max: number = avg
-    console.log(`sum: ${sum}, avg: ${avg}, max: ${max}`)
+    let max: number = getMax(-Infinity, sum)
     
     if (k < nums.length) {
         for (let i: number = 1; i < nums.length; i++) {
             sum -= nums[i - 1]
             sum += nums[i + k - 1]
-            avg = sum / k
-            max = max > avg ? max : avg
-            console.log(`sum: ${sum}, avg: ${avg}, max: ${max}`)
+            max = getMax(max, sum)
             if (typeof nums[i + k] !== 'number') break
         }
     }
 
     return max
+
+    function getMax (maximum: number, arraySum: number): number {
+        let average = arraySum / k
+        let newMax = maximum > average ? maximum : average
+        return newMax
+    }
 }
 
 const arr: number[] = [6,8,6,8,0,4,1,2,9,9]
