@@ -22,7 +22,7 @@ function findMaxAverage(nums, k) {
 }
 const arr = [6, 8, 6, 8, 0, 4, 1, 2, 9, 9];
 console.log(findMaxAverage(arr, 2));
-//#region OLD
+//#region OLD ATTEMPT
 // function findMaxAverage(nums: number[], k: number): number {
 //     let kLengthArr: number[] = nums.slice(0, k);
 //     let sum: number = kLengthArr.reduce((acc, num) => acc + num);
