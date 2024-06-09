@@ -1,4 +1,4 @@
-### 643 - [Max Average Subarray](https://github.com/ben-w-martin/leetcode/blob/master/typescript/max-avg-subarray.ts) - June 9, 2024
+### June 9, 2024 - [Max Average Subarray - 643](https://github.com/ben-w-martin/leetcode/blob/master/typescript/max-avg-subarray.ts)
 
   1. The function has two loops.
   2. The first loop finds the sum of the initial subarray, beginning with index 0 to the index k.
